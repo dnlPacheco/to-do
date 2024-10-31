@@ -5,6 +5,10 @@ function getTodoList() {
     return tasks
 }
 
+function saveTodoList(tasks) {
+    localStorage.setItem(localStorageKey, JSON.stringify(tasks))
+}
+
 function addNewTask() {
     const input = document.querySelector('#input-new-task')
 
@@ -19,7 +23,7 @@ function addNewTask() {
         task: input.value.trim()
     })
 
-    localStorage.setItem(localStorageKey, JSON.stringify(tasks))
+    saveTodoList(tasks)
 
     input.value = ''
 
@@ -57,7 +61,7 @@ function removeTask(item) {
 
     if(taskIndex !== -1) tasks.splice(taskIndex, 1)
 
-    localStorage.setItem(localStorageKey, JSON.stringify(tasks))
+    saveTodoList(tasks)
     showTodoList()
 
 }
