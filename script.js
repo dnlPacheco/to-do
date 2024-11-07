@@ -27,12 +27,18 @@ function addNewTask() {
 
   const tasks = getTodoList();
 
+  if (editTaskID) {
+    const taskIndex = tasks.findIndex((t) => t.id === editTaskID);
+    if (taskIndex !== -1) tasks[taskIndex].task = input.value.trim();
+
+    editTaskID = null;
+  } else {
     tasks.push({
       id: Date.now(),
       task: input.value.trim(),
       completed: false,
     });
-  
+  }
 
   saveTodoList(tasks);
   input.value = "";
@@ -53,6 +59,13 @@ function createListItem(task) {
   const taskText = document.createElement("span");
   taskText.textContent = task?.task;
 
+  const editBtn = document.createElement("button");
+  editBtn.textContent = "Edit";
+  editBtn.classList.add("btn-edit-task");
+  editBtn.addEventListener("click", () => {
+    editTask(task);
+  });
+
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "Delete";
   deleteBtn.classList.add("btn-delete-task");
@@ -62,6 +75,7 @@ function createListItem(task) {
 
   listItem.appendChild(checkbox);
   listItem.appendChild(taskText);
+  listItem.appendChild(editBtn);
   listItem.appendChild(deleteBtn);
 
   if (task.completed) {
@@ -74,12 +88,20 @@ function createListItem(task) {
 function showTodoList() {
   const tasks = getTodoList();
   const todoList = document.getElementById("to-do-list");
+  
   todoList.innerHTML = "";
 
   tasks.forEach((task) => {
     const listItem = createListItem(task);
     todoList.appendChild(listItem);
   });
+}
+
+function editTask(task) {
+  inputTask = document.getElementById("input-new-task");
+
+  inputTask.value = task?.task;
+  editTaskID = task.id;
 }
 
 function removeTask(task) {
