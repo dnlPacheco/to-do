@@ -58,17 +58,15 @@ function createListItem(task) {
 
   const taskText = document.createElement("span");
   taskText.textContent = task?.task;
+  const editBtn = document.createElement("i");  
+  editBtn.classList.add("fas", "fa-edit", "btn-edit-task");
 
-  const editBtn = document.createElement("button");
-  editBtn.textContent = "Edit";
-  editBtn.classList.add("btn-edit-task");
   editBtn.addEventListener("click", () => {
     editTask(task);
   });
 
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Delete";
-  deleteBtn.classList.add("btn-delete-task");
+  const deleteBtn = document.createElement("i");
+  deleteBtn.classList.add("fas", "fa-trash", "btn-delete-task");
   deleteBtn.addEventListener("click", () => {
     removeTask(task);
   });
