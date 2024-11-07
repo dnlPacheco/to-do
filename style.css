@@ -6,9 +6,9 @@
 
 body {
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 .container {
@@ -29,32 +29,49 @@ h1 {
 
 #input-new-task,
 #btn-new-task {
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border: 0.125rem solid #8bc7ad;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.125rem solid #8bc7ad;
 }
 
 #input-new-task {
 }
 
 #btn-new-task {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .content-list {
 }
 
 #to-do-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-#to-do-list li{
-    list-style-type: none;
-    text-transform: capitalize;
-    display: flex;
-    justify-content: space-between;
+#to-do-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+}
 
+#to-do-list li span {
+  margin-left: 0.5rem;
+  /* text-transform: capitalize; */
+}
+
+.btn-edit-task {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.btn-delete-task {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.completed {
+  text-decoration: line-through;
 }
