@@ -41,6 +41,15 @@ function addNewTask() {
 
 function createListItem(task) {
   const listItem = document.createElement("li");
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.checked = task.completed;
+
+  checkbox.addEventListener("click", () => {
+    toggleCheckbox(task);
+  });
+
   const taskText = document.createElement("span");
   taskText.textContent = task?.task;
 
@@ -51,7 +60,7 @@ function createListItem(task) {
     removeTask(task);
   });
 
-  
+  listItem.appendChild(checkbox);
   listItem.appendChild(taskText);
   listItem.appendChild(deleteBtn);
 
@@ -64,7 +73,7 @@ function createListItem(task) {
 
 function showTodoList() {
   const tasks = getTodoList();
-  const todoList = document.getElementById("to-do-list"); 
+  const todoList = document.getElementById("to-do-list");
   todoList.innerHTML = "";
 
   tasks.forEach((task) => {
@@ -80,6 +89,17 @@ function removeTask(task) {
   if (taskIndex !== -1) tasks.splice(taskIndex, 1);
 
   saveTodoList(tasks);
+  showTodoList();
+}
+
+function toggleCheckbox(task) {
+  const tasks = getTodoList();
+  const taskIndex = tasks.findIndex((t) => t?.id === task?.id);
+
+  if (taskIndex !== -1) {
+    tasks[taskIndex].completed = !tasks[taskIndex].completed;
+    saveTodoList(tasks);
+  }
   showTodoList();
 }
 
