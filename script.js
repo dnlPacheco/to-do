@@ -1,7 +1,16 @@
 const localStorageKey = "to-do-list";
 
+const form = document.querySelector("#form");
+let editTaskID = null;
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  addNewTask();
+});
+
 function getTodoList() {
-  let tasks = JSON.parse(localStorage.getItem(localStorageKey) || "[]");
+  const tasks = JSON.parse(localStorage.getItem(localStorageKey) || "[]");
   return tasks;
 }
 
@@ -16,37 +25,46 @@ function addNewTask() {
     return alert("Digite algum texto!");
   }
 
-  let tasks = getTodoList();
+  const tasks = getTodoList();
 
-  tasks.push({
-    id: Date.now(),
-    task: input.value.trim(),
-  });
+    tasks.push({
+      id: Date.now(),
+      task: input.value.trim(),
+      completed: false,
+    });
+  
 
   saveTodoList(tasks);
-
   input.value = "";
-
   showTodoList();
 }
 
 function createListItem(task) {
   const listItem = document.createElement("li");
-  listItem.textContent = task?.task;
+  const taskText = document.createElement("span");
+  taskText.textContent = task?.task;
 
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "Delete";
+  deleteBtn.classList.add("btn-delete-task");
   deleteBtn.addEventListener("click", () => {
     removeTask(task);
   });
+
+  
+  listItem.appendChild(taskText);
   listItem.appendChild(deleteBtn);
+
+  if (task.completed) {
+    taskText.classList.add("completed");
+  }
 
   return listItem;
 }
 
 function showTodoList() {
-  let tasks = getTodoList();
-  let todoList = document.getElementById("to-do-list");
+  const tasks = getTodoList();
+  const todoList = document.getElementById("to-do-list"); 
   todoList.innerHTML = "";
 
   tasks.forEach((task) => {

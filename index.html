@@ -12,14 +12,15 @@
 <body>
     <h1>To-do list</h1>
     <div class="container">
-        <div class="add-task">
-            <input id="input-new-task" placeholder="Add your task" />
-            <button id="btn-new-task" onclick="addNewTask()">Add task</button>
-        </div>
+        <form id="form">
+            <div class="add-task">
+                <input id="input-new-task" placeholder="Add your task" />
+                <button id="btn-new-task" type="submit">Add task</button>
+            </div>
+        </form>
         <div class="content-list">
             <ul id="to-do-list"></ul>
         </div>
-
     </div>
     <script src="./script.js"></script>
 </body>
