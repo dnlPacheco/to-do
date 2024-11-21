@@ -1,6 +1,6 @@
 * {
-  margin: 0;
-  padding: 0;
+  /* margin: 0; */
+  /* padding: 0; */
   font-family: "Ubuntu", sans-serif;
 }
 
@@ -21,6 +21,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
+  width: 100%;
 }
 
 h1 {
@@ -28,6 +29,7 @@ h1 {
 }
 
 #input-new-task,
+#input-edit-task,
 #btn-new-task {
   padding: 1rem;
   border-radius: 0.5rem;
@@ -65,13 +67,39 @@ h1 {
 .btn-edit-task {
   margin-left: auto;
   cursor: pointer;
+  color: #2196F3
+}
+
+.btn-edit-task:hover {
+  color: #1976D2
 }
 
 .btn-delete-task {
-  margin-left: 0.5rem;
+  margin-left: 1rem;
   cursor: pointer;
+  color: #F44336
+}
+
+.btn-delete-task:hover {
+  color: #D32F2F
 }
 
 .completed {
   text-decoration: line-through;
+}
+
+.edit-task {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+dialog {
+  border: none;
+  border-radius: 0.5rem;
+}
+
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.3)
 }
