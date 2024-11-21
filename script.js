@@ -1,3 +1,5 @@
+import { createTask, generateTaskId } from "./repository.js";
+
 const localStorageKey = "to-do-list";
 
 const form = document.querySelector("#form");
@@ -26,11 +28,9 @@ function addNewTask() {
 
   const tasks = getTodoList();
 
-  tasks.push({
-    id: Date.now(),
-    task: input.value.trim(),
-    completed: false,
-  });
+  const newTask = createTask(generateTaskId(), input.value.trim());
+
+  tasks.push(newTask);
 
   saveTodoList(tasks);
   input.value = "";
@@ -87,8 +87,6 @@ function showTodoList() {
   });
 }
 
-function confirmEditTask() {}
-
 function editTask(task) {
   const inputEditTask = document.getElementById("input-edit-task");
   const modal = document.querySelector("dialog");
@@ -123,7 +121,6 @@ document.getElementById("btn-edit").addEventListener("click", () => {
   closeModal();
   modal.removeAttribute("data-id");
 });
-
 
 document.getElementById("btn-cancel-edit").addEventListener("click", () => {
   const modal = document.querySelector("dialog");
