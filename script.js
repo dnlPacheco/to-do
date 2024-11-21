@@ -19,20 +19,24 @@ function saveTodoList(tasks) {
   localStorage.setItem(localStorageKey, JSON.stringify(tasks));
 }
 
+function validateInput(input) {
+  if (!input.value.trim()) {
+    alert('Digite algum texto!')
+    return false
+  }
+  return true
+}
+
 function addNewTask() {
   const input = document.querySelector("#input-new-task");
 
-  if (!input.value) {
-    return alert("Digite algum texto!");
-  }
+  if (!validateInput(input)) return
 
   const tasks = getTodoList();
-
   const newTask = createTask(generateTaskId(), input.value.trim());
-
   tasks.push(newTask);
-
   saveTodoList(tasks);
+  
   input.value = "";
   showTodoList();
 }
