@@ -1,6 +1,4 @@
-import { createTask, generateTaskId } from "./repository.js";
-
-const localStorageKey = "to-do-list";
+import { createTask, generateTaskId, saveTodoList, getTodoList } from "./repository.js";
 
 const form = document.querySelector("#form");
 
@@ -9,15 +7,6 @@ form.addEventListener("submit", (event) => {
 
   addNewTask();
 });
-
-function getTodoList() {
-  const tasks = JSON.parse(localStorage.getItem(localStorageKey) || "[]");
-  return tasks;
-}
-
-function saveTodoList(tasks) {
-  localStorage.setItem(localStorageKey, JSON.stringify(tasks));
-}
 
 function validateInput(input) {
   if (!input.value.trim()) {
@@ -95,24 +84,20 @@ function editTask(task) {
   const inputEditTask = document.getElementById("input-edit-task");
   const modal = document.querySelector("dialog");
 
-  // Atribui o ID da tarefa ao modal
   modal.setAttribute("data-id", task.id);
 
-  // Preenche o campo de entrada com o valor da tarefa
   inputEditTask.value = task.task;
-
-  // Mostra o modal
+  
   modal.showModal();
 }
 
 document.getElementById("btn-edit").addEventListener("click", () => {
   const inputEditTask = document.getElementById("input-edit-task");
   const modal = document.querySelector("dialog");
-  const taskId = modal.getAttribute("data-id"); // Recupera o ID armazenado no modal
+  const taskId = modal.getAttribute("data-id");
 
   const tasks = getTodoList();
 
-  // Localiza a tarefa pelo ID
   const taskIndex = tasks.findIndex((t) => t.id === Number(taskId));
 
   if (taskIndex !== -1) {
@@ -121,7 +106,6 @@ document.getElementById("btn-edit").addEventListener("click", () => {
     showTodoList();
   }
 
-  // Fecha o modal e remove o atributo data-id
   closeModal();
   modal.removeAttribute("data-id");
 });
@@ -129,7 +113,6 @@ document.getElementById("btn-edit").addEventListener("click", () => {
 document.getElementById("btn-cancel-edit").addEventListener("click", () => {
   const modal = document.querySelector("dialog");
 
-  // Fecha o modal e limpa o atributo data-id
   closeModal();
   modal.removeAttribute("data-id");
 });
